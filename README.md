@@ -41,6 +41,7 @@ nest new ng-app client ## Select don't initialize
 ng new client
 npm i --save @nestjs/typeorm typeorm
 npm install pg --save
+ng add @angular/material
 
 ## Support
 
@@ -51,7 +52,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
