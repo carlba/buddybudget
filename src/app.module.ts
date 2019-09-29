@@ -6,6 +6,7 @@ import {
   PostgresConnectionOptions
 } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TransactionsModule } from './transactions/transactions.module';
 
 const typeOrmConfig = {
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -19,7 +20,8 @@ const typeOrmConfig = {
     AngularModule.forRoot({
       rootPath: 'client/dist/client'
     }),
-    TypeOrmModule.forRoot(typeOrmConfig)
+    TypeOrmModule.forRoot(typeOrmConfig),
+    TransactionsModule
   ],
   controllers: [AppController],
   providers: [AppService],
