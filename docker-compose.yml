@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  buddybudget-sql:
+    container_name: buddybudget-sql
+    image: postgres:11.3
+    environment:
+      POSTGRES_USER: buddybudget
+      POSTGRES_PASSWORD: buddybudget
+      POSTGRES_DB: buddybudget
+    ports:
+      - "5432:5432"
+    volumes:
+      - buddybudget_data_db:/var/lib/postgresql/data
+
+volumes:
+  buddybudget_data_db:
