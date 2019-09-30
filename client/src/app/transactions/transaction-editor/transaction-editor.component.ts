@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TransactionsService } from '../transactions.service';
 import { filter, map } from 'rxjs/operators';
 import { Transaction } from '../../../../../src/transactions/transaction.entity';
+import IMask from 'imask';
 
 @Component({
   selector: 'app-event-editor',
@@ -15,11 +16,13 @@ export class TransactionEditorComponent implements OnInit {
   form = this.fb.group({
     name: [null, [Validators.required]],
     description: [null],
+    price: [null],
     date: [null]
   });
   public editing = false;
   public entityName = 'transaction';
   private transactionId: string;
+  public numberMask = IMask.MaskedNumber;
 
   constructor(
     private fb: FormBuilder,

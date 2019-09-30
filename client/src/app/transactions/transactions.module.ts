@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FlexModule } from '@angular/flex-layout';
+import { IMaskModule } from 'angular-imask';
 
 import { TransactionsComponent } from './transactions.component';
 
@@ -23,7 +24,8 @@ import { TransactionsComponent } from './transactions.component';
     RouterModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    FlexModule
+    FlexModule,
+    IMaskModule
   ]
 })
 export class TransactionsModule { }

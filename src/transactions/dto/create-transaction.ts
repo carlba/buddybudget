@@ -1,4 +1,4 @@
-import { IsISO8601, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsCurrency, IsISO8601, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTransactionDto {
   @IsNotEmpty()
@@ -9,7 +9,10 @@ export class CreateTransactionDto {
   @IsString()
   description: string;
 
-  @IsOptional()
+  @IsCurrency()
+  price: number;
+
+  @IsNotEmpty()
   @IsISO8601()
-  date?: Date;
+  date: Date;
 }
