@@ -45,6 +45,15 @@ ng add @angular/material
 
 ## Support
 
+## Upload data
+```bash
+curl -F upload=@data/trans.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=skandia"
+```
+
+```bash
+curl -F upload=@data/statement.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=norwegian"
+```
+
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch

@@ -21,8 +21,9 @@ export class Transaction {
   @Column()
   name: string;
 
-  @Column()
-  description: string;
+  @IsOptional()
+  @Column({nullable: true})
+  description?: string;
 
   @IsOptional()
   @IsCurrency()

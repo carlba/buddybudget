@@ -13,7 +13,7 @@
         <input matInput formControlName="description" placeholder="Description">
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="amount" [unmask]="true" [imask]="{mask:numberMask, min: 0, max: 20000}" placeholder="Price">
+        <input matInput formControlName="amount" [unmask]="true" [imask]="{mask:numberMask, min: -20000, max: 20000}" placeholder="Price">
       </mat-form-field>
       <mat-form-field>
         <input matInput formControlName="date" [matDatepicker]="datePicker" required autocomplete="false">
