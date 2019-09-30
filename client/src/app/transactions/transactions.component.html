@@ -1,8 +1,8 @@
 <button mat-button [routerLink]="['./create']">CREATE</button>
 <table mat-table [dataSource]="transactions$">
-  <ng-container *ngFor="let disCol of dbColumns; let colIndex = index" matColumnDef="{{disCol}}">
+  <ng-container *ngFor="let disCol of dbColumns" matColumnDef="{{disCol}}">
     <th mat-header-cell *matHeaderCellDef>{{capitalizeFirstLetter(disCol)}}</th>
-    <td mat-cell *matCellDef="let element">{{element[disCol]}}</td>
+    <td mat-cell *matCellDef="let element">{{ disCol === 'date' ? (element[disCol] | date ) : element[disCol] }}</td>
   </ng-container>
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
