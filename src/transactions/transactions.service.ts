@@ -31,6 +31,10 @@ export class TransactionsService {
     return await this.transactionRepository.save(createTransactionDto);
   }
 
+  async createMany(createTransactionsDto: CreateTransactionDto[]): Promise<Transaction[]> {
+    return await this.transactionRepository.save(createTransactionsDto);
+  }
+
   async delete(id: number): Promise<void> {
     await this.transactionRepository.delete(id);
     return;

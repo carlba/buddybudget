@@ -24,8 +24,13 @@ export class TransactionsController {
     return await this.transactionsService.findOne(+params.id);
   }
   @Post()
-  create(@Body() createEventDto: CreateTransactionDto) {
-    return this.transactionsService.create(createEventDto);
+  create(@Body() createTransactionDto: CreateTransactionDto) {
+    return this.transactionsService.create(createTransactionDto);
+  }
+
+  @Post('batch')
+  createMany(@Body() createTransactionsDto: CreateTransactionDto[]) {
+    return this.transactionsService.createMany(createTransactionsDto);
   }
 
   @Delete(':id')
