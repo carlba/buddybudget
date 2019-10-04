@@ -35,13 +35,13 @@ $ npm run test:cov
 ```
 
 ## Boilerplate
-nest new buddybudget
-cd buddybudget
-nest new ng-app client ## Select don't initialize
-ng new client
-npm i --save @nestjs/typeorm typeorm
-npm install pg --save
-ng add @angular/material
+1. nest new buddybudget
+2. cd buddybudget
+3. nest new ng-app client ## Select don't initialize
+4. ng new client
+5. npm i --save @nestjs/typeorm typeorm
+6. npm install pg --save
+7. ng add @angular/material
 
 ## Support
 
