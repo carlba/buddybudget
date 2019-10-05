@@ -33,7 +33,7 @@ export class Transaction {
     nullable: true,
     transformer: new PriceTransformer()
   })
-  price: number | string;
+  amount: number | string;
 
   @Column({nullable: true, type: 'timestamptz'})
   date?: Date;

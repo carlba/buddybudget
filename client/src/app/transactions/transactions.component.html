@@ -5,7 +5,7 @@
     <ng-container *ngIf="disCol==='date'">
       <td mat-cell *matCellDef="let element">{{ element[disCol] | date }}</td>
     </ng-container>
-    <ng-container *ngIf="disCol==='price'">
+    <ng-container *ngIf="disCol==='amount'">
       <td mat-cell *matCellDef="let element">{{ element[disCol] | currency }}</td>
     </ng-container>
     <ng-container *ngIf="['name', 'description'].includes(disCol)">

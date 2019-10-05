@@ -16,7 +16,7 @@ export class TransactionEditorComponent implements OnInit {
   form = this.fb.group({
     name: [null, [Validators.required]],
     description: [null],
-    price: [null],
+    amount: [null],
     date: [null]
   });
   public editing = false;

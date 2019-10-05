@@ -10,7 +10,7 @@ import { Transaction } from '../../../../src/transactions/transaction.entity';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  public dbColumns: string[] = ['name', 'description', 'price', 'date'];
+  public dbColumns: string[] = ['name', 'description', 'amount', 'date'];
   public displayedColumns: string[] = [...this.dbColumns, 'actions'];
   public transactions$: Observable<Transaction[]> = this.transactionsService.getAll();
 

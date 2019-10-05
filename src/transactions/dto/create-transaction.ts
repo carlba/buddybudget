@@ -10,7 +10,7 @@ export class CreateTransactionDto {
   description: string;
 
   @IsCurrency()
-  price: number;
+  amount: number;
 
   @IsNotEmpty()
   @IsISO8601()
