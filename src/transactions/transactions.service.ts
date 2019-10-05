@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as XLSX from 'xlsx';
 
 import { Transaction } from './transaction.entity';
 import { CreateTransactionDto } from './dto/create-transaction';
@@ -33,6 +34,39 @@ export class TransactionsService {
 
   async createMany(createTransactionsDto: CreateTransactionDto[]): Promise<Transaction[]> {
     return await this.transactionRepository.save(createTransactionsDto);
+  }
+
+  async createManyExcel(buffer: Buffer, format: string) {
+    const workBook = XLSX.read(buffer, {cellDates: true});
+    let json: any;
+    let workSheet: XLSX.WorkSheet;
+    let formatted: CreateTransactionDto[] = [];
+    /* tslint:disable:no-string-literal */
+    if (format === 'skandia') {
+      workSheet = workBook.Sheets.Kontoutdrag;
+      json = XLSX.utils.sheet_to_json(workSheet);
+
+      formatted = json.map((row => {
+        return {
+          name: row['Beskrivning'],
+          date: row['Bokf. datum'],
+          amount: row['Belopp']
+        };
+      }));
+    }
+
+    if (format === 'norwegian') {
+      workSheet = workBook.Sheets.transactions;
+      json = XLSX.utils.sheet_to_json(workSheet);
+      formatted = json.map((row => {
+        return {
+          name: row['Text'],
+          date: new Date(row['TransactionDate']).toISOString(),
+          amount: row['Amount']
+        };
+      }));
+    }
+    return this.createMany(formatted);
   }
 
   async delete(id: number): Promise<void> {
