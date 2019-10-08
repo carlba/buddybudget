@@ -8,8 +8,13 @@
 $ npm install
 ```
 
-## Running the app
+## Prerequisites
 
+Start a Postgres server on localhost port 5432.  The server should grant full access to a database called `buddybudget`
+with login credentials `buddybudget:buddybudget`.  (Could be achieved by running `docker-compose up buddybudget-sql`.)
+
+## Running the App
+ 
 ```bash
 # development
 $ npm run start
