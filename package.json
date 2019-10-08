@@ -5,6 +5,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "preinstall" : "npm --prefix ./client install ./client",
     "build": "rimraf dist && tsc -p tsconfig.build.json && cd client && npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
