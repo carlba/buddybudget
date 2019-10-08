@@ -18,7 +18,7 @@ const typeOrmConfig = {
 @Module({
   imports: [
     AngularModule.forRoot({
-      rootPath: 'client/dist/client'
+      rootPath: __dirname + '/client'
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     TransactionsModule

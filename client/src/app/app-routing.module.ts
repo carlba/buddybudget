@@ -5,8 +5,9 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { TransactionEditorComponent } from './transactions/transaction-editor/transaction-editor.component';
 
 const routes: Routes = [
-  {
-    path: '', component: TransactionsComponent
+  { path: '',
+    redirectTo: '/transactions',
+    pathMatch: 'full'
   },
   {
     path: 'transactions', component: TransactionsComponent
