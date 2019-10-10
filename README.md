@@ -62,11 +62,11 @@ automatically on changes.
 ## Inserting data
 
 ```bash
-curl -F upload=@data/trans.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=skandia"
+curl -F upload=@data/bankStatement_skandia.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=skandia"
 ```
 
 ```bash
-curl -F upload=@data/statement.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=norwegian"
+curl -F upload=@data/bankStatement_norwegian.xlsx "http://localhost:3000/api/transactions/batch/xlxs?format=norwegian"
 ```
 
 ## Test
