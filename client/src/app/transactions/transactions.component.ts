@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { TransactionsService } from './transactions.service';
 import { Transaction } from '../../../../src/transactions/transaction.entity';
@@ -10,14 +12,24 @@ import { Transaction } from '../../../../src/transactions/transaction.entity';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  public dbColumns: string[] = ['name', 'description', 'amount', 'date'];
+  public dbColumns: string[] = ['name', 'description', 'category', 'amount', 'date'];
   public displayedColumns: string[] = [...this.dbColumns, 'actions'];
-  public transactions: Transaction[] = []
+  public transactions: Transaction[]; 
+  public dataSource: MatTableDataSource<Transaction>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   constructor(private transactionsService: TransactionsService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     this.transactionsService.getAll()
-    .subscribe(data => this.transactions = data);
+      .subscribe(transactions => {
+        this.dataSource.data = this.transactions = transactions;
+      });
   }
 
   capitalizeFirstLetter(str: string) {
@@ -27,7 +39,8 @@ export class TransactionsComponent implements OnInit {
   onDelete(id: number) {
     const action = this.transactionsService.delete(id);
     action.subscribe(res => {
-      this.transactions = this.transactions.filter(t => t.id !== id);
+      this.dataSource.data = this.transactions = this.transactions
+        .filter(transaction => transaction.id !== id)
     },
     error => { console.log('error') });
   }

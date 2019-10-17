@@ -9,6 +9,10 @@ export class CreateTransactionDto {
   @IsString()
   description?: string;
 
+  @IsOptional()
+  @IsString()
+  category?: string;
+
   @IsCurrency()
   amount: number;
 
