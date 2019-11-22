@@ -2,19 +2,17 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisites
+
+* Node >= 12
+* Docker >= 18 and Docker Compose
+* Angular CLI installed globally `npm install -g @angular/cli`
+
 ## Installation
 
 ```bash
 npm install
 ```
-
-## Prerequisites
-
-* Node >= 12
-* Docker >= 18
-* Angular CLI installed globally `npm install -g @angular/cli`
-* Start a Postgres server on localhost port 5432.  The server should grant full access to a database called `buddybudget`
-  with login credentials `buddybudget:buddybudget`.  (Could be achieved by running `docker-compose up buddybudget-sql`.)
 
 ## Running the App
  
