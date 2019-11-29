@@ -26,6 +26,10 @@ export class Transaction {
   description?: string;
 
   @IsOptional()
+  @Column({nullable: true})
+  category?: string;
+
+  @IsOptional()
   @IsCurrency()
   @Column({
     type: 'decimal',
