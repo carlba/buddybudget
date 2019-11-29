@@ -51,7 +51,7 @@ The best development experience is achieved, like so
 2. Start the frontend
    
    ```bash
-   ng serve
+   npm run start:frontend
    ```
 
 The frontend and backend will now be available on port 4200 and 3000, respectively. And both will be reloaded 
