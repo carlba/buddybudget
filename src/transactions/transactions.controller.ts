@@ -1,16 +1,30 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common';
 import { IsNumberString, IsString } from 'class-validator';
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './transaction.entity';
 import { CreateTransactionDto } from './dto/create-transaction';
+import { PatchTransactionDto } from './dto/patch-transaction';
 
 class Params {
   @IsNumberString()
   id: number;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 class ParamsCreateMany {
   @IsString()
   format: string;
@@ -53,5 +67,10 @@ export class TransactionsController {
   @Put(':id')
   update(@Body() createEventDto: CreateTransactionDto, @Param() params: Params) {
     return this.transactionsService.update(+params.id, createEventDto);
+  }
+
+  @Patch(':id')
+  patch(@Body() patchTransactionDto: PatchTransactionDto, @Param() params: Params) {
+    return this.transactionsService.patch(+params.id, patchTransactionDto);
   }
 }

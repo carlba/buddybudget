@@ -31,4 +31,9 @@ export class TransactionsService {
   delete(id: number) {
     return this.http.delete(`${this.TRANSACTIONS_URL}/${id}`);
   }
+
+  patch(id: number, transaction: Transaction) {
+    return this.http.patch<Transaction>(`${this.TRANSACTIONS_URL}/${id}`, transaction);
+  }
+
 }

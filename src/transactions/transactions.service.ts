@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 
 import { Transaction } from './transaction.entity';
 import { CreateTransactionDto } from './dto/create-transaction';
+import { PatchTransactionDto } from './dto/patch-transaction';
 
 @Injectable()
 export class TransactionsService {
@@ -76,6 +77,11 @@ export class TransactionsService {
 
   async update(id: number, createEventDto: CreateTransactionDto) {
     const event = this.transactionRepository.create({...createEventDto, id});
+    return await this.transactionRepository.save(event);
+  }
+
+  async patch(id: number, patchTransactionDto: PatchTransactionDto) {
+    const event = this.transactionRepository.create({...patchTransactionDto, id});
     return await this.transactionRepository.save(event);
   }
 }
