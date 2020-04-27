@@ -13,10 +13,15 @@ import { IMaskModule } from 'angular-imask';
 import { AgGridModule } from '@ag-grid-community/angular';
 
 import { TransactionsComponent } from './transactions.component';
+import { TransactionUploadComponent } from './transaction-upload/transaction-upload.component';
 
 
 @NgModule({
-  declarations: [TransactionsComponent, TransactionEditorComponent],
+  declarations: [
+    TransactionsComponent,
+    TransactionEditorComponent,
+    TransactionUploadComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

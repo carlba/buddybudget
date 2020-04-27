@@ -7,6 +7,7 @@ import { concatMap, tap } from 'rxjs/operators';
 
 import { TransactionsService } from './transactions.service';
 import { Transaction } from '../../../../src/transactions/transaction.entity';
+import { UploadService } from './transaction-upload/upload.service';
 
 @Component({
   selector: 'app-transactions',
@@ -43,17 +44,22 @@ export class TransactionsComponent implements OnInit {
   };
   modules = AllCommunityModules;
   transactions: Transaction[];
-  transactions$ = this.transactionsService.getAll();
   updateGrid$: Subject<boolean> = new Subject();
-
-  constructor(private transactionsService: TransactionsService) { }
+  transactions$: Subject<Transaction[]> = new Subject();
+  constructor(private transactionsService: TransactionsService, private uploadService: UploadService) { }
 
   ngOnInit() {
-    this.updateGrid$.pipe(
-      concatMap(() => this.calculateSum('amount'))
-    ).subscribe((sum) => {
+    this.transactionsService.getAll().subscribe((transactions) => this.transactions$.next(transactions));
+    this.uploadService.uploadChanges$.pipe(concatMap(() => this.transactionsService.getAll())).subscribe((transactions => {
+      console.log('test12');
+      this.transactions$.next(transactions);
+    }));
+    this.updateGrid$.pipe(concatMap( () => this.calculateSum('amount'))).subscribe(sum => {
+      console.log(sum);
+      console.log(sum);
       this.sum.setValue(sum);
     });
+
   }
 
   calculateSum(column): Observable<number> {
@@ -64,7 +70,8 @@ export class TransactionsComponent implements OnInit {
     return of(sum);
   }
 
-  async onGridReady(params) {
+  onGridReady(params) {
+    console.log('grid ready');
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.updateGrid$.next(true);
@@ -78,7 +85,13 @@ export class TransactionsComponent implements OnInit {
       ).subscribe();
   }
 
-  async onFilterChanged(filterValue) {
+  onFilterChanged(filterValue) {
     this.updateGrid$.next(true);
+  }
+
+  onRowDataChanged($event: any) {
+    console.log($event);
+    this.updateGrid$.next(true);
+
   }
 }

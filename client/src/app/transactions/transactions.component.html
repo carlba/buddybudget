@@ -2,6 +2,7 @@
 <mat-form-field>
   <input matInput [formControl]="sum" placeholder="Sum" type="text">
 </mat-form-field>
+<app-transaction-upload></app-transaction-upload>
 <ag-grid-angular
   style="width: 100%; height: 90vh"
   class="ag-theme-balham"
@@ -14,6 +15,7 @@
   (cellValueChanged)="onCellValueChanged($event)"
   (filterChanged)="onFilterChanged($event)"
   [defaultColDef]="defaultColDef"
+  (rowDataChanged)="onRowDataChanged($event)"
 >
 
 </ag-grid-angular>

@@ -4,7 +4,9 @@ import {
   MatTableModule,
   MatFormFieldModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatIconModule
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,7 +23,9 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatDividerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
+    MatIconModule
   ],
 })
 export class AngularMaterialModule { }
