@@ -10,11 +10,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FlexModule } from '@angular/flex-layout';
 import { IMaskModule } from 'angular-imask';
+import { AgGridModule } from '@ag-grid-community/angular';
 
 import { TransactionsComponent } from './transactions.component';
+import { TransactionUploadComponent } from './transaction-upload/transaction-upload.component';
+
 
 @NgModule({
-  declarations: [TransactionsComponent, TransactionEditorComponent],
+  declarations: [
+    TransactionsComponent,
+    TransactionEditorComponent,
+    TransactionUploadComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -25,7 +32,8 @@ import { TransactionsComponent } from './transactions.component';
     MatDatepickerModule,
     MatMomentDateModule,
     FlexModule,
-    IMaskModule
+    IMaskModule,
+    AgGridModule.withComponents([])
   ]
 })
 export class TransactionsModule { }
