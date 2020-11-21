@@ -1,4 +1,8 @@
-<div>
-  <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-  <input type="file" #filePicker (change)="onFilePicked($event)">
-</div>
+<button mat-stroked-button type="button" (click)="filePicker.click()">Upload File</button>
+<input type="file" #filePicker accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, text/csv" (change)="onFilePicked($event)">
+
+<mat-form-field>
+  <mat-select [formControl]="format">
+    <mat-option *ngFor="let format of formats" [value]="format"> {{format}} </mat-option>
+  </mat-select>
+</mat-form-field>

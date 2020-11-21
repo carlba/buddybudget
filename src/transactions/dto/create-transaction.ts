@@ -18,5 +18,5 @@ export class CreateTransactionDto {
 
   @IsNotEmpty()
   @IsISO8601()
-  date: Date;
+  date: string;
 }

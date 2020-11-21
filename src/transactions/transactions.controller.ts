@@ -30,6 +30,7 @@ class ParamsCreateMany {
   format: string;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 @Controller('transactions')
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService ) {}
@@ -57,6 +58,12 @@ export class TransactionsController {
   @UseInterceptors(FilesInterceptor('upload'))
   async createManyExcel(@UploadedFiles() upload, @Query() params: ParamsCreateMany) {
     return this.transactionsService.createManyExcel(upload[0].buffer, params.format);
+  }
+
+  @Post('batch/csv')
+  @UseInterceptors(FilesInterceptor('upload'))
+  async createManyCsv(@UploadedFiles() upload, @Query() params: ParamsCreateMany) {
+    return this.transactionsService.createManyCsv(upload[0].buffer, params.format);
   }
 
   @Delete(':id')
