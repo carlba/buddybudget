@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: buddybudget
       POSTGRES_DB: buddybudget
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - buddybudget_data_db:/var/lib/postgresql/data
 

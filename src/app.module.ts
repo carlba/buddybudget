@@ -12,7 +12,7 @@ const typeOrmConfig = {
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: true,
   type: 'postgres',
-  url: 'postgres://buddybudget:buddybudget@localhost:5432/buddybudget',
+  url: 'postgres://buddybudget:buddybudget@localhost:5433/buddybudget',
 } as PostgresConnectionOptions;
 
 @Module({

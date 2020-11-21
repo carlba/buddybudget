@@ -1,17 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn, ValueTransformer } from 'typeorm';
+import { AfterLoad, Column, Entity, PrimaryGeneratedColumn, ValueTransformer } from 'typeorm';
 import { IsCurrency, IsOptional } from 'class-validator';
 
-class PriceTransformer implements ValueTransformer {
+// class PriceTransformer implements ValueTransformer {
 
-  to(value: string): string {
-    return value;
-  }
+//   to(value: string): string {
+//     return value;
+//   }
 
-  from(value: string): string {
-    return value === null ? null : parseFloat(value).toString();
-  }
-}
+//   from(value: string): string {
+//     return value === null ? null : parseFloat(value).toString();
+//   }
+// }
 
+// tslint:disable-next-line: max-classes-per-file
 @Entity()
 export class Transaction {
 
@@ -36,10 +37,15 @@ export class Transaction {
     precision: 10,
     scale: 2,
     nullable: true,
-    transformer: new PriceTransformer()
+    // transformer: new PriceTransformer()
   })
   amount: number | string;
 
   @Column({nullable: true, type: 'timestamptz'})
   date?: Date;
+  @AfterLoad() _convertNumerics() {
+    if (typeof(this.amount) === 'string') {
+      this.amount = parseFloat(this.amount);
+    }
+  }
 }

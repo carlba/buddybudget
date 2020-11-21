@@ -7,6 +7,8 @@ import * as XLSX from 'xlsx';
 import { Transaction } from './transaction.entity';
 import { CreateTransactionDto } from './dto/create-transaction';
 import { PatchTransactionDto } from './dto/patch-transaction';
+import { parseCsv } from '../lib/csv';
+import { bufferToStream, removeLines } from '../lib/stream';
 
 @Injectable()
 export class TransactionsService {
@@ -29,16 +31,20 @@ export class TransactionsService {
     }
   }
 
-  async create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
+  async create(
+    createTransactionDto: CreateTransactionDto,
+  ): Promise<Transaction> {
     return await this.transactionRepository.save(createTransactionDto);
   }
 
-  async createMany(createTransactionsDto: CreateTransactionDto[]): Promise<Transaction[]> {
+  async createMany(
+    createTransactionsDto: CreateTransactionDto[],
+  ): Promise<Transaction[]> {
     return await this.transactionRepository.save(createTransactionsDto);
   }
 
   async createManyExcel(buffer: Buffer, format: string) {
-    const workBook = XLSX.read(buffer, {cellDates: true});
+    const workBook = XLSX.read(buffer, { cellDates: true });
     let json: any;
     let workSheet: XLSX.WorkSheet;
     let formatted: CreateTransactionDto[] = [];
@@ -47,27 +53,41 @@ export class TransactionsService {
       workSheet = workBook.Sheets.Kontoutdrag;
       json = XLSX.utils.sheet_to_json(workSheet);
 
-      formatted = json.map((row => {
+      formatted = json.map(row => {
         return {
           name: row['Beskrivning'],
           date: row['Bokf. datum'],
-          amount: row['Belopp']
+          amount: row['Belopp'],
         };
-      }));
+      });
     }
 
     if (format === 'norwegian') {
       workSheet = workBook.Sheets.transactions;
       json = XLSX.utils.sheet_to_json(workSheet);
-      formatted = json.map((row => {
+      formatted = json.map(row => {
         return {
           name: row['Text'],
           date: new Date(row['TransactionDate']).toISOString(),
-          amount: row['Amount']
+          amount: row['Amount'],
         };
-      }));
+      });
     }
     return this.createMany(formatted);
+  }
+
+  async createManyCsv(buffer: Buffer, format: string) {
+    const lines = removeLines(bufferToStream(buffer), 3);
+    const parsedCsv = await parseCsv(lines);
+    const formattedTransactions = parsedCsv.data.map(transaction => {
+      const name = transaction['Meddelande'] ? transaction['Meddelande'] : transaction['Transaktionstyp'] ;
+      return {
+        name,
+        date: new Date(transaction['Transaktionsdatum']).toISOString(),
+        amount: +transaction['Belopp'].replace(' ', '').replace(',', '.')
+      };
+    });
+    return this.createMany(formattedTransactions);
   }
 
   async delete(id: number): Promise<void> {
@@ -76,12 +96,15 @@ export class TransactionsService {
   }
 
   async update(id: number, createEventDto: CreateTransactionDto) {
-    const event = this.transactionRepository.create({...createEventDto, id});
+    const event = this.transactionRepository.create({ ...createEventDto, id });
     return await this.transactionRepository.save(event);
   }
 
   async patch(id: number, patchTransactionDto: PatchTransactionDto) {
-    const event = this.transactionRepository.create({...patchTransactionDto, id});
+    const event = this.transactionRepository.create({
+      ...patchTransactionDto,
+      id,
+    });
     return await this.transactionRepository.save(event);
   }
 }

@@ -6,7 +6,8 @@ import {
   MatSortModule,
   MatPaginatorModule,
   MatProgressBarModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,7 +26,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
 })
 export class AngularMaterialModule { }
