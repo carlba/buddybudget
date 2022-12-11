@@ -25,7 +25,7 @@
     "@ag-grid-community/angular": "^22.0.0",
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
-    "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/typeorm": "^6.2.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.10.1",
