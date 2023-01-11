@@ -28,7 +28,7 @@
     "@nestjs/platform-express": "^6.0.0",
     "@nestjs/typeorm": "^6.2.0",
     "class-transformer": "^0.3.1",
-    "class-validator": "^0.10.1",
+    "class-validator": "^0.14.0",
     "multer": "^1.4.2",
     "papaparse": "^5.3.0",
     "pg": "^7.12.1",
